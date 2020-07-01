@@ -1,0 +1,26 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Publish Docker
+        uses: elgohr/Publish-Docker-Github-Action@2.12
+        with:
+          name: yogstation13/byondver/byondver
+          username: ${{secrets.DOCKER_PUSH_USERNAME}}
+          password: ${{secrets.DOCKER_PUSH_PASSWORD}}
+          registry: docker.pkg.github.com
+          tags: ${{github.sha}}
+      - name: Deploy
+        uses: steebchen/kubectl@v1.0.0
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: set image --namespace byondver deployment/byondver yogbot=docker.pkg.github.com/yogstation13/byondver/byondver:${{github.sha}}
