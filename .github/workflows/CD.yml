@@ -23,4 +23,4 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: set image --namespace byondver deployment/byondver yogbot=docker.pkg.github.com/yogstation13/byondver/byondver:${{github.sha}}
+          args: set image --namespace byondver deployment/byondver byondver=docker.pkg.github.com/yogstation13/byondver/byondver:${{github.sha}}

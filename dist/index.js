@@ -132,6 +132,8 @@ var verreq = https_1.request("https://secure.byond.com/download/version.txt", fu
                 ];
                 var selectedbuild = builds[0];
                 var embed = {
+                    username: "BYOND Changelog",
+                    avatar_url: "https://cdn.discordapp.com/icons/81104451930165248/395762b8f813342035d9db71e3b16f1c.webp",
                     content: "BYOND version " + selectedbuild.name + " released!",
                     embeds: [
                         {
