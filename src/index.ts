@@ -18,16 +18,13 @@ function sendMessage(obj: message){
         const body = JSON.stringify(obj);
         config.webhooks.forEach((url: string) => {
             const options = {
-                host: "localhost",
-                port: 8888,
-                path: url,
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 }
             };
             console.log(obj)
-            const dreq = request(options);
+            const dreq = sreq(url, options);
 
             dreq.on("error", (e) => {
                 console.error(`Error with request: ${e.message}`);
@@ -103,7 +100,7 @@ function doVersion(version: string, channel: Channel) {
 
     const [major] = version.split(".");
 
-    const req = request({path: `http://www.byond.com/docs/notes/${major}.html`, host: "localhost", port: 8888}, res => {
+    const req = request(`http://www.byond.com/docs/notes/${major}.html`, res => {
         let content = "";
         res.setEncoding("utf8");
         res.on("data", chunk => {

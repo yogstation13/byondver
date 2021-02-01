@@ -20,16 +20,13 @@ function sendMessage(obj) {
         var body_1 = JSON.stringify(obj);
         config.webhooks.forEach(function (url) {
             var options = {
-                host: "localhost",
-                port: 8888,
-                path: url,
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 }
             };
             console.log(obj);
-            var dreq = http_1.request(options);
+            var dreq = https_1.request(url, options);
             dreq.on("error", function (e) {
                 console.error("Error with request: " + e.message);
             });
@@ -62,7 +59,7 @@ function doVersion(version, channel) {
         return;
     }
     var major = version.split(".")[0];
-    var req = http_1.request({ path: "http://www.byond.com/docs/notes/" + major + ".html", host: "localhost", port: 8888 }, function (res) {
+    var req = http_1.request("http://www.byond.com/docs/notes/" + major + ".html", function (res) {
         var content = "";
         res.setEncoding("utf8");
         res.on("data", function (chunk) {
