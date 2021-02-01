@@ -8,4 +8,4 @@ Persistant files:
 data/config.json | holds the webhook urls
 data/data.json   | holds the last version posted
 
-The app has to be updated each time theres a new major version, the update is simple, its just changing the link on the second request
+~~The app has to be updated each time theres a new major version, the update is simple, its just changing the link on the second request~~ NOT ANYMORE
